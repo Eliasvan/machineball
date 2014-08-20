@@ -46,7 +46,7 @@ int mainMenu(void)
 
 	GLuint pat01tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat01tex = allegro_gl_make_texture(&mb_pattern01);
+	pat01tex = allegro_gl_make_texture(&mb_pattern01_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -54,7 +54,7 @@ int mainMenu(void)
 	
 	GLuint pat02tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat02tex = allegro_gl_make_texture(&mb_pattern02);
+	pat02tex = allegro_gl_make_texture(&mb_pattern02_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -64,7 +64,7 @@ int mainMenu(void)
 	GLuint machineballtex;
 	allegro_gl_set_texture_format(GL_RGBA);
 	BITMAP *bmp = create_bitmap_ex(32, 256, 64);
-	blit(&mb_machineball, bmp, 0, 0, 0, 0, 256, 64);
+	blit(&mb_machineball_bmp, bmp, 0, 0, 0, 0, 256, 64);
 	machineballtex = allegro_gl_make_masked_texture(bmp);
 	destroy_bitmap(bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -96,13 +96,13 @@ int mainMenu(void)
 		{
 			choice++;
 			downkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_UP] || controls[0].keydown(KEYUP)) && upkey==0)
 		{
 			choice--;
 			upkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if(!(key[KEY_DOWN] || controls[0].keydown(KEYDOWN)))
 			downkey=0;
@@ -210,7 +210,7 @@ int mainMenu(void)
 		allegro_gl_flip();
 		allegro_gl_end();
 	}
-	play_sample(&mb_samp_menusel, 255, 128, 1000, 0);
+	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
 	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
 		poll_joystick();
@@ -250,7 +250,7 @@ int ballMenu(void)
 
 	GLuint pat01tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat01tex = allegro_gl_make_texture(&mb_pattern01);
+	pat01tex = allegro_gl_make_texture(&mb_pattern01_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -258,7 +258,7 @@ int ballMenu(void)
 	
 	GLuint pat02tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat02tex = allegro_gl_make_texture(&mb_pattern02);
+	pat02tex = allegro_gl_make_texture(&mb_pattern02_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -267,22 +267,22 @@ int ballMenu(void)
 	GLuint balltex[6];
 	DATAFILE * ballbmp;
 	allegro_gl_set_texture_format(GL_RGB);
-	balltex[0] = allegro_gl_make_texture(&mb_ball01);
+	balltex[0] = allegro_gl_make_texture(&mb_ball01_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	balltex[1] = allegro_gl_make_texture(&mb_ball02);
+	balltex[1] = allegro_gl_make_texture(&mb_ball02_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	balltex[2] = allegro_gl_make_texture(&mb_ball03);
+	balltex[2] = allegro_gl_make_texture(&mb_ball03_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	balltex[3] = allegro_gl_make_texture(&mb_ball04);
+	balltex[3] = allegro_gl_make_texture(&mb_ball04_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	balltex[4] = allegro_gl_make_texture(&mb_ball05);
+	balltex[4] = allegro_gl_make_texture(&mb_ball05_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	balltex[5] = allegro_gl_make_texture(&mb_ball06);
+	balltex[5] = allegro_gl_make_texture(&mb_ball06_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -307,13 +307,13 @@ int ballMenu(void)
 		{
 			choice++;
 			rightkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_LEFT] || controls[0].keydown(KEYLEFT)) && leftkey==0)
 		{
 			choice--;
 			leftkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if(!(key[KEY_RIGHT] || controls[0].keydown(KEYRIGHT)))
 			rightkey=0;
@@ -432,7 +432,7 @@ int ballMenu(void)
 		allegro_gl_flip();
 		allegro_gl_end();
 	}
-	play_sample(&mb_samp_menusel, 255, 128, 1000, 0);
+	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
 	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
 		poll_joystick();
@@ -472,7 +472,7 @@ int courtMenu(void)
 
 	GLuint pat01tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat01tex = allegro_gl_make_texture(&mb_pattern01);
+	pat01tex = allegro_gl_make_texture(&mb_pattern01_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -480,7 +480,7 @@ int courtMenu(void)
 	
 	GLuint pat02tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat02tex = allegro_gl_make_texture(&mb_pattern02);
+	pat02tex = allegro_gl_make_texture(&mb_pattern02_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -507,13 +507,13 @@ int courtMenu(void)
 		{
 			cs++;
 			rightkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_LEFT] || controls[0].keydown(KEYLEFT)) && leftkey==0)
 		{
 			cs--;
 			leftkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if(!(key[KEY_RIGHT] || controls[0].keydown(KEYRIGHT)))
 			rightkey=0;
@@ -756,7 +756,7 @@ int courtMenu(void)
 		allegro_gl_flip();
 		allegro_gl_end();
 	}
-	play_sample(&mb_samp_menusel, 255, 128, 1000, 0);
+	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
 	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
 		poll_joystick();
@@ -799,7 +799,7 @@ void gameoptionsMenu(gameoptions *op)
 
 	GLuint pat01tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat01tex = allegro_gl_make_texture(&mb_pattern01);
+	pat01tex = allegro_gl_make_texture(&mb_pattern01_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -807,7 +807,7 @@ void gameoptionsMenu(gameoptions *op)
 	
 	GLuint pat02tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat02tex = allegro_gl_make_texture(&mb_pattern02);
+	pat02tex = allegro_gl_make_texture(&mb_pattern02_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -833,49 +833,49 @@ void gameoptionsMenu(gameoptions *op)
 		{
 			choice++;
 			downkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_UP] || controls[0].keydown(KEYUP)) && upkey==0)
 		{
 			choice--;
 			upkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_RIGHT] || controls[0].keydown(KEYRIGHT)) && rightkey==0 && choice==0)
 		{
 			op->timegoallimit=!op->timegoallimit;
 			rightkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_LEFT] || controls[0].keydown(KEYLEFT)) && leftkey==0 && choice==0)
 		{
 			op->timegoallimit=!op->timegoallimit;
 			leftkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_RIGHT] || controls[0].keydown(KEYRIGHT)) && rightkey==0 && choice==2)
 		{
 			op->preventstuck=!op->preventstuck;
 			rightkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_LEFT] || controls[0].keydown(KEYLEFT)) && leftkey==0 && choice==2)
 		{
 			op->preventstuck=!op->preventstuck;
 			leftkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_RIGHT] || controls[0].keydown(KEYRIGHT)) && rightkey==0 && choice==3)
 		{
 			op->powerupsenabled=!op->powerupsenabled;
 			rightkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_LEFT] || controls[0].keydown(KEYLEFT)) && leftkey==0 && choice==3)
 		{
 			op->powerupsenabled=!op->powerupsenabled;
 			leftkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_RIGHT] || controls[0].keydown(KEYRIGHT)) && rightkey==0 && choice==1)
 		{
@@ -883,7 +883,7 @@ void gameoptionsMenu(gameoptions *op)
 			if(op->timegoals>5)
 				op->timegoals=0;
 			rightkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_LEFT] || controls[0].keydown(KEYLEFT)) && leftkey==0 && choice==1)
 		{
@@ -891,7 +891,7 @@ void gameoptionsMenu(gameoptions *op)
 			if(op->timegoals<0)
 				op->timegoals=5;
 			leftkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_RIGHT] || controls[0].keydown(KEYRIGHT)) && rightkey==0 && choice==4)
 		{
@@ -899,7 +899,7 @@ void gameoptionsMenu(gameoptions *op)
 			if(op->powerupfrequency>3)
 				op->powerupfrequency=0;
 			rightkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_LEFT] || controls[0].keydown(KEYLEFT)) && leftkey==0 && choice==4)
 		{
@@ -907,7 +907,7 @@ void gameoptionsMenu(gameoptions *op)
 			if(op->powerupfrequency<0)
 				op->powerupfrequency=3;
 			leftkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 
 
@@ -1153,7 +1153,7 @@ void gameoptionsMenu(gameoptions *op)
 		allegro_gl_flip();
 		allegro_gl_end();
 	}
-	play_sample(&mb_samp_menusel, 255, 128, 1000, 0);
+	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
 	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
 		poll_joystick();
@@ -1216,7 +1216,7 @@ void humancompmessage(void)
 		poll_joystick();
 		al_poll_duh(dp);
 	}
-	play_sample(&mb_samp_menusel, 255, 128, 1000, 0);
+	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
 	while(key[KEY_ENTER] || key[KEY_SPACE] || key[KEY_ESC] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
 		poll_joystick();
@@ -1241,7 +1241,7 @@ int optionsMenu(void)
 
 	GLuint pat01tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat01tex = allegro_gl_make_texture(&mb_pattern01);
+	pat01tex = allegro_gl_make_texture(&mb_pattern01_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -1249,7 +1249,7 @@ int optionsMenu(void)
 	
 	GLuint pat02tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat02tex = allegro_gl_make_texture(&mb_pattern02);
+	pat02tex = allegro_gl_make_texture(&mb_pattern02_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -1275,13 +1275,13 @@ int optionsMenu(void)
 		{
 			choice++;
 			downkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_UP] || controls[0].keydown(KEYUP)) && upkey==0)
 		{
 			choice--;
 			upkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if(!(key[KEY_DOWN] || controls[0].keydown(KEYDOWN)))
 			downkey=0;
@@ -1363,7 +1363,7 @@ int optionsMenu(void)
 		allegro_gl_flip();
 		allegro_gl_end();
 	}
-	play_sample(&mb_samp_menusel, 255, 128, 1000, 0);
+	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
 	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
 		poll_joystick();
@@ -1393,7 +1393,7 @@ void audioMenu(void)
 
 	GLuint pat01tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat01tex = allegro_gl_make_texture(&mb_pattern01);
+	pat01tex = allegro_gl_make_texture(&mb_pattern01_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -1401,7 +1401,7 @@ void audioMenu(void)
 	
 	GLuint pat02tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat02tex = allegro_gl_make_texture(&mb_pattern02);
+	pat02tex = allegro_gl_make_texture(&mb_pattern02_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -1427,13 +1427,13 @@ void audioMenu(void)
 		{
 			choice++;
 			downkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_UP] || controls[0].keydown(KEYUP)) && upkey==0)
 		{
 			choice--;
 			upkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if(!(key[KEY_DOWN] || controls[0].keydown(KEYDOWN)))
 			downkey=0;
@@ -1556,7 +1556,7 @@ void audioMenu(void)
 		allegro_gl_flip();
 		allegro_gl_end();
 	}
-	play_sample(&mb_samp_menusel, 255, 128, 1000, 0);
+	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
 	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
 		poll_joystick();
@@ -1585,7 +1585,7 @@ void videoMenu(void)
 
 	GLuint pat01tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat01tex = allegro_gl_make_texture(&mb_pattern01);
+	pat01tex = allegro_gl_make_texture(&mb_pattern01_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -1593,7 +1593,7 @@ void videoMenu(void)
 	
 	GLuint pat02tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat02tex = allegro_gl_make_texture(&mb_pattern02);
+	pat02tex = allegro_gl_make_texture(&mb_pattern02_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -1619,13 +1619,13 @@ void videoMenu(void)
 		{
 			choice++;
 			downkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_UP] || controls[0].keydown(KEYUP)) && upkey==0)
 		{
 			choice--;
 			upkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if(!(key[KEY_DOWN] || controls[0].keydown(KEYDOWN)))
 			downkey=0;
@@ -1739,7 +1739,7 @@ void videoMenu(void)
 		allegro_gl_flip();
 		allegro_gl_end();
 	}
-	play_sample(&mb_samp_menusel, 255, 128, 1000, 0);
+	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
 	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
 		poll_joystick();
@@ -2003,7 +2003,7 @@ void controlsMenu(void)
 
 	GLuint pat01tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat01tex = allegro_gl_make_texture(&mb_pattern01);
+	pat01tex = allegro_gl_make_texture(&mb_pattern01_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -2011,7 +2011,7 @@ void controlsMenu(void)
 	
 	GLuint pat02tex;
 	allegro_gl_set_texture_format(GL_RGB);
-	pat02tex = allegro_gl_make_texture(&mb_pattern02);
+	pat02tex = allegro_gl_make_texture(&mb_pattern02_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -2038,13 +2038,13 @@ void controlsMenu(void)
 		{
 			choicey++;
 			downkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_UP] || controls[0].keydown(KEYUP)) && upkey==0)
 		{
 			choicey--;
 			upkey=1;
-			play_sample(&mb_samp_menumove, 255, 128, 1000, 0);
+			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if(!(key[KEY_DOWN] || controls[0].keydown(KEYDOWN)))
 			downkey=0;
@@ -2385,7 +2385,7 @@ void controlsMenu(void)
 		allegro_gl_flip();
 		allegro_gl_end();
 	}
-	play_sample(&mb_samp_menusel, 255, 128, 1000, 0);
+	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
 	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
 		poll_joystick();
@@ -2403,7 +2403,7 @@ void creditsMenu(void)
 	GLuint machineballtex;
 	allegro_gl_set_texture_format(GL_RGBA);
 	BITMAP *bmp = create_bitmap_ex(32, 256, 64);
-	blit(&mb_machineball, bmp, 0, 0, 0, 0, 256, 64);
+	blit(&mb_machineball_bmp, bmp, 0, 0, 0, 0, 256, 64);
 	machineballtex = allegro_gl_make_masked_texture(bmp);
 	destroy_bitmap(bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

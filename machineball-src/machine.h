@@ -57,7 +57,7 @@ class Machine
 		void setsteer(double s);
 		void addsteer(double s);
 
-		void push(void) { if(energy==4) { pushtime=0.5; energy=0; play_sample(&mb_samp_kick, 255, 128, 1000, 0); } };
+		void push(void) { if(energy==4) { pushtime=0.5; energy=0; play_sample(&mb_kick_wav, 255, 128, 1000, 0); } };
 		void adjustPush(double m);
 
 		void fire(void);

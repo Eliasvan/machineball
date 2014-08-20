@@ -25,7 +25,7 @@ void Text::init(void)
 	int char_end[128];
 
 	BITMAP * bmp = create_bitmap_ex(32, 256, 256);
-	blit(&mb_font, bmp, 0, 0, 0, 0, 256, 256);
+	blit(&mb_fontcolor_bmp, bmp, 0, 0, 0, 0, 256, 256);
 
 
 	// Find out how many rows of characters are in the original BITMAP

@@ -277,7 +277,7 @@ void Machine::fire(void)
 			powerupammo--;
 			powerupcharge=3;
 			powerupcount=1;
-			play_sample(&mb_samp_turbo, 255, 128, 1000, 0);
+			play_sample(&mb_turbo_wav, 255, 128, 1000, 0);
 		}
 		if(poweruptype==2)
 		{
@@ -292,7 +292,7 @@ void Machine::fire(void)
 					mines.addMine(result[0], result[1], 0);
 				else
 					mines.addMine(result[0], result[1], 1);
-				play_sample(&mb_samp_minelay, 255, 128, 1000, 0);
+				play_sample(&mb_minelay_wav, 255, 128, 1000, 0);
 			}
 		}
 		if(poweruptype==3 || poweruptype==4)
@@ -324,7 +324,7 @@ void Machine::fire(void)
 						projectiles.addProjectile(result[0], result[1], x*130, y*100, angle, 0, 0);
 					else
 						projectiles.addProjectile(result[0], result[1], x*130, y*100, angle, 0, 1);
-					play_sample(&mb_samp_mlaunch1, 255, 128, 1000, 0);
+					play_sample(&mb_mlaunch1_wav, 255, 128, 1000, 0);
 				}
 				else
 				{
@@ -332,7 +332,7 @@ void Machine::fire(void)
 						projectiles.addProjectile(result[0], result[1], x*160, y*160, angle, 1, 0);
 					else
 						projectiles.addProjectile(result[0], result[1], x*160, y*160, angle, 1, 1);
-					play_sample(&mb_samp_mlaunch2, 255, 128, 1000, 0);
+					play_sample(&mb_mlaunch2_wav, 255, 128, 1000, 0);
 				}
 			}
 		}

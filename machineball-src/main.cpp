@@ -293,103 +293,103 @@ void loadProgramData(void)
 	text.init();
 
 
-	shadowtex = allegro_gl_make_texture_ex(AGL_TEXTURE_RESCALE|AGL_TEXTURE_FLIP, &mb_shadow, GL_ALPHA4);
+	shadowtex = allegro_gl_make_texture_ex(AGL_TEXTURE_RESCALE|AGL_TEXTURE_FLIP, &mb_shadow_tga, GL_ALPHA4);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	poweruptex = allegro_gl_make_texture_ex(AGL_TEXTURE_RESCALE|AGL_TEXTURE_FLIP, &mb_powerup, GL_ALPHA4);
+	poweruptex = allegro_gl_make_texture_ex(AGL_TEXTURE_RESCALE|AGL_TEXTURE_FLIP, &mb_powerup_tga, GL_ALPHA4);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	allegro_gl_set_texture_format(GL_RGB);
-	floortex = allegro_gl_make_texture(&mb_floor01);
+	floortex = allegro_gl_make_texture(&mb_floor01_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	allegro_gl_set_texture_format(GL_RGB);
-	walltex = allegro_gl_make_texture(&mb_wall01);
+	walltex = allegro_gl_make_texture(&mb_wall01_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	allegro_gl_set_texture_format(GL_RGB);
-	machinetex = allegro_gl_make_texture(&mb_machinetex);
+	machinetex = allegro_gl_make_texture(&mb_machinetex_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	allegro_gl_set_texture_format(GL_RGB);
-	reflecttex = allegro_gl_make_texture(&mb_reflect);
+	reflecttex = allegro_gl_make_texture(&mb_reflect_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	allegro_gl_set_texture_format(GL_RGBA);
 	BITMAP * bmp = create_bitmap_ex(32, 256, 128);
-	blit(&mb_goal, bmp, 0, 0, 0, 0, 256, 128);
+	blit(&mb_goal_bmp, bmp, 0, 0, 0, 0, 256, 128);
 	goaltex = allegro_gl_make_masked_texture(bmp);
 	destroy_bitmap(bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	bennykramekwebtex = allegro_gl_make_texture_ex(AGL_TEXTURE_RESCALE|AGL_TEXTURE_FLIP, &mb_bennykramekweb, GL_ALPHA4);
+	bennykramekwebtex = allegro_gl_make_texture_ex(AGL_TEXTURE_RESCALE|AGL_TEXTURE_FLIP, &mb_bennykramekweb_tga, GL_ALPHA4);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	allegro_gl_set_texture_format(GL_RGBA);
 	bmp = create_bitmap_ex(32, 128, 128);
-	blit(&mb_weapons, bmp, 0, 0, 0, 0, 128, 128);
+	blit(&mb_weapons_bmp, bmp, 0, 0, 0, 0, 128, 128);
 	weaponstex = allegro_gl_make_masked_texture(bmp);
 	destroy_bitmap(bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	allegro_gl_set_texture_format(GL_RGBA);
-	explosiontex = allegro_gl_make_texture(&mb_explosion);
+	explosiontex = allegro_gl_make_texture(&mb_explosion_tga);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 
 	// Music:
-	DUMBFILE *f = dumbfile_open_memory((char*)mb_music_menu, 51355);
+	DUMBFILE *f = dumbfile_open_memory((char*)mb_menu_xm, 51355);
 	menuduh = dumb_read_xm(f);
 	dumbfile_close(f);
 
-	f = dumbfile_open_memory((char*)mb_song01, 39778);
+	f = dumbfile_open_memory((char*)mb_song01_s3m, 39778);
 	songduh[0] = dumb_read_s3m(f);
 	dumbfile_close(f);
-	f = dumbfile_open_memory((char*)mb_song02, 40450);
+	f = dumbfile_open_memory((char*)mb_song02_mod, 40450);
 	songduh[1] = dumb_read_mod(f);
 	dumbfile_close(f);
-	f = dumbfile_open_memory((char*)mb_song03, 19772);
+	f = dumbfile_open_memory((char*)mb_song03_mod, 19772);
 	songduh[2] = dumb_read_mod(f);
 	dumbfile_close(f);
-	f = dumbfile_open_memory((char*)mb_song04, 86546);
+	f = dumbfile_open_memory((char*)mb_song04_mod, 86546);
 	songduh[3] = dumb_read_mod(f);
 	dumbfile_close(f);
-	f = dumbfile_open_memory((char*)mb_song05, 53969);
+	f = dumbfile_open_memory((char*)mb_song05_xm, 53969);
 	songduh[4] = dumb_read_xm(f);
 	dumbfile_close(f);
-	f = dumbfile_open_memory((char*)mb_song06, 42300);
+	f = dumbfile_open_memory((char*)mb_song06_xm, 42300);
 	songduh[5] = dumb_read_xm(f);
 	dumbfile_close(f);
-	f = dumbfile_open_memory((char*)mb_song07, 99704);
+	f = dumbfile_open_memory((char*)mb_song07_mod, 99704);
 	songduh[6] = dumb_read_mod(f);
 	dumbfile_close(f);
-	f = dumbfile_open_memory((char*)mb_song08, 59748);
+	f = dumbfile_open_memory((char*)mb_song08_xm, 59748);
 	songduh[7] = dumb_read_xm(f);
 	dumbfile_close(f);
-	f = dumbfile_open_memory((char*)mb_song09, 37452);
+	f = dumbfile_open_memory((char*)mb_song09_xm, 37452);
 	songduh[8] = dumb_read_xm(f);
 	dumbfile_close(f);
-	f = dumbfile_open_memory((char*)mb_song10, 60500);
+	f = dumbfile_open_memory((char*)mb_song10_mod, 60500);
 	songduh[9] = dumb_read_mod(f);
 	dumbfile_close(f);
-	f = dumbfile_open_memory((char*)mb_song11, 24636);
+	f = dumbfile_open_memory((char*)mb_song11_mod, 24636);
 	songduh[10] = dumb_read_mod(f);
 	dumbfile_close(f);
-	f = dumbfile_open_memory((char*)mb_song12, 29262);
+	f = dumbfile_open_memory((char*)mb_song12_mod, 29262);
 	songduh[11] = dumb_read_mod(f);
 	dumbfile_close(f);
 

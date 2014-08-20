@@ -206,7 +206,7 @@ if (do_configure) {
 	int i;
 	for(i=0; i<400; i++)
 		hline(screen, 0, i, 599, makecol(0, 0, i*192/400));
-	blit(&mb_machineball, screen, 0, 0, 172, 20, 256, 64);
+	blit(&mb_machineball_bmp, screen, 0, 0, 172, 20, 256, 64);
 	text_mode(-1);
 	textout_centre(screen, font, "Benny Kramek", 300, 90, makecol(255, 255, 255)); 
 	textout_centre(screen, font, "http://benny.kramekweb.com", 300, 110, makecol(255, 255, 255)); 

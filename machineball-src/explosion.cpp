@@ -50,7 +50,7 @@ void ExplosionList::addExplosion(double xp, double yp, double zp, double startra
 	numexplosions++;
 	while(list[freepos].active)
 		freepos++;
-	play_sample(&mb_samp_explosion, 255, 128, 1000, 0);
+	play_sample(&mb_explosion_wav, 255, 128, 1000, 0);
 }
 
 

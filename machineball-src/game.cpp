@@ -112,17 +112,17 @@ void startGame(int mode, int cs, int b, gameoptions op)
 
 	allegro_gl_set_texture_format(GL_RGB);
 	if(b==0)
-		balltex = allegro_gl_make_texture(&mb_ball01);
+		balltex = allegro_gl_make_texture(&mb_ball01_bmp);
 	else if(b==1)
-		balltex = allegro_gl_make_texture(&mb_ball02);
+		balltex = allegro_gl_make_texture(&mb_ball02_bmp);
 	else if(b==2)
-		balltex = allegro_gl_make_texture(&mb_ball03);
+		balltex = allegro_gl_make_texture(&mb_ball03_bmp);
 	else if(b==3)
-		balltex = allegro_gl_make_texture(&mb_ball04);
+		balltex = allegro_gl_make_texture(&mb_ball04_bmp);
 	else if(b==4)
-		balltex = allegro_gl_make_texture(&mb_ball05);
+		balltex = allegro_gl_make_texture(&mb_ball05_bmp);
 	else if(b==5)
-		balltex = allegro_gl_make_texture(&mb_ball06);
+		balltex = allegro_gl_make_texture(&mb_ball06_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -393,7 +393,7 @@ void startGame(int mode, int cs, int b, gameoptions op)
 						if(powerups.getPowerup(i).type==1)
 						{
 							machine[j].shieldcount+=20;
-							play_sample(&mb_samp_shield, 255, 128, 1000, 0);
+							play_sample(&mb_shield_wav, 255, 128, 1000, 0);
 						}
 						else
 						{
@@ -406,16 +406,16 @@ void startGame(int mode, int cs, int b, gameoptions op)
 							}
 							machine[j].powerupammo++;
 							if(machine[j].poweruptype==0)
-								play_sample(&mb_samp_turbo2, 255, 128, 1000, 0);
+								play_sample(&mb_turbo2_wav, 255, 128, 1000, 0);
 							else if(machine[j].poweruptype==2)
 							{
-								play_sample(&mb_samp_mines, 255, 128, 1000, 0);
+								play_sample(&mb_mines_wav, 255, 128, 1000, 0);
 								machine[j].powerupammo++;
 							}
 							else if(machine[j].poweruptype==3)
-								play_sample(&mb_samp_missle, 255, 128, 1000, 0);
+								play_sample(&mb_missle_wav, 255, 128, 1000, 0);
 							else if(machine[j].poweruptype==4)
-								play_sample(&mb_samp_emp, 255, 128, 1000, 0);
+								play_sample(&mb_emp_wav, 255, 128, 1000, 0);
 						}
 						powerups.removePowerup(i);
 					}
@@ -525,7 +525,7 @@ void startGame(int mode, int cs, int b, gameoptions op)
 						if(machine[0].shieldcount==0)
 						{
 							machine[0].meshatekcount+=9;
-							play_sample(&mb_samp_shituk, 255, 128, 1000, 0);
+							play_sample(&mb_shituk_wav, 255, 128, 1000, 0);
 						}
 						projectiles.removeProjectile(i);
 					}
@@ -550,7 +550,7 @@ void startGame(int mode, int cs, int b, gameoptions op)
 						if(machine[1].shieldcount==0)
 						{
 							machine[1].meshatekcount+=9;
-							play_sample(&mb_samp_shituk, 255, 128, 1000, 0);
+							play_sample(&mb_shituk_wav, 255, 128, 1000, 0);
 						}
 						projectiles.removeProjectile(i);
 					}
@@ -616,13 +616,13 @@ void startGame(int mode, int cs, int b, gameoptions op)
 				{
 					goals[1]++;
 					goalcount=4;
-					play_sample(&mb_samp_goal, 255, 128, 1000, 0);
+					play_sample(&mb_goal_wav, 255, 128, 1000, 0);
 				}
 				else if(pos[0]-ball.getRadius() > court.x && goalcount==0)
 				{
 					goals[0]++;
 					goalcount=4;
-					play_sample(&mb_samp_goal, 255, 128, 1000, 0);
+					play_sample(&mb_goal_wav, 255, 128, 1000, 0);
 				}
 			}
 

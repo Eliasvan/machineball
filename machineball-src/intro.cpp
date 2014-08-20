@@ -49,7 +49,7 @@ void showIntro(void)
 	GLuint machineballtex;
 	allegro_gl_set_texture_format(GL_RGBA);
 	BITMAP *bmp = create_bitmap_ex(32, 256, 64);
-	blit(&mb_machineball, bmp, 0, 0, 0, 0, 256, 64);
+	blit(&mb_machineball_bmp, bmp, 0, 0, 0, 0, 256, 64);
 	machineballtex = allegro_gl_make_masked_texture(bmp);
 	destroy_bitmap(bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
