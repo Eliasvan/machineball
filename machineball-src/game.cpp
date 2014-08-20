@@ -102,8 +102,8 @@ void startGame(int mode, int cs, int b, gameoptions op)
 	explosions.init();
 	projectiles.init();
 
-	bodymodel.load("0");
-	pushermodel.load("1");
+	bodymodel.load((char*)"0");
+	pushermodel.load((char*)"1");
 
 	allegro_gl_begin();
 
@@ -167,8 +167,6 @@ void startGame(int mode, int cs, int b, gameoptions op)
 	currentsong=rand()%12;
 
 
-	DUH *myduh;
-	myduh = dumb_load_s3m("data/music01.s3m");
 	AL_DUH_PLAYER *dp;
 	dp = al_start_duh(songduh[currentsong], 2, 0, (float)options.musicvol/255.0, 2048, 22050);
 	
@@ -214,9 +212,8 @@ void startGame(int mode, int cs, int b, gameoptions op)
 
 		if(gamepaused)
 		{
-			int keyrightdown, keyleftdown;
-			int needchange;
-			needchange=0;
+			int keyrightdown = 0, keyleftdown = 0;
+			int needchange = 0;
 			if(!(key[KEY_LEFT] || controls[0].keydown(KEYLEFT)))
 					keyleftdown=0;
 			if(!(key[KEY_RIGHT] || controls[0].keydown(KEYRIGHT)))
@@ -732,7 +729,7 @@ void collisiondetection(void)
 
 	for(i=0; i<4; i++)
 	{
-		if(dCollide(ball.geom, court.corner[i], 1, &contact[cn].geom, sizeof(dContactGeom))>0)
+		if(dCollide(ball.geom, court.corner[i], 1, &contact[cn].geom, sizeof(dContactGeom)) > 0)
 		{
 			contact[cn].surface.mode = dContactBounce;
 			contact[cn].surface.bounce = ball.getBounce();
@@ -748,7 +745,7 @@ void collisiondetection(void)
 	{
 		for(i=0; i<12; i++)
 		{
-			if(dCollide(ball.geom, court.wall[i+2], 1, &contact[cn].geom, sizeof(dContactGeom))>0)
+			if(dCollide(ball.geom, court.wall[i+2], 1, &contact[cn].geom, sizeof(dContactGeom)) > 0)
 			{
 				contact[cn].surface.mode = dContactBounce;
 				contact[cn].surface.bounce = ball.getBounce();
@@ -766,7 +763,7 @@ void collisiondetection(void)
 		dGeomSetPosition(explosionsphere, explosions.getExplosion(j).x, explosions.getExplosion(j).y, explosions.getExplosion(j).z);
 		dGeomSphereSetRadius(explosionsphere, explosions.getExplosion(j).curradius);
 		int n;
-		if(n=dCollide(ball.geom, explosionsphere, 4, &contact[cn].geom, sizeof(dContact))>0)
+		if((n=dCollide(ball.geom, explosionsphere, 4, &contact[cn].geom, sizeof(dContact))) > 0)
 		{
 			contact[cn].surface.mode = dContactSoftERP | dContactSoftCFM;
 			contact[cn].surface.mu = 5000;
@@ -786,7 +783,7 @@ void collisiondetection(void)
 			for(k=0; k<4; k++)
 			{
 				int n;
-				if(n=dCollide(machine[i].geom[k], court.wall[j], 4, &contact[cn].geom, sizeof(dContact))>0)
+				if((n=dCollide(machine[i].geom[k], court.wall[j], 4, &contact[cn].geom, sizeof(dContact))) > 0)
 				{
 					if(contact[cn].geom.pos[1]<-37 || contact[cn].geom.pos[1]>37 || j>13)
 					{
@@ -806,7 +803,7 @@ void collisiondetection(void)
 			for(k=0; k<4; k++)
 			{
 				int n;
-				if(n=dCollide(machine[i].geom[k], court.corner[j], 4, &contact[cn].geom, sizeof(dContact))>0)
+				if((n=dCollide(machine[i].geom[k], court.corner[j], 4, &contact[cn].geom, sizeof(dContact))) > 0)
 				{
 					contact[cn].surface.mode = dContactBounce;
 					contact[cn].surface.bounce = 0.2;
@@ -821,7 +818,7 @@ void collisiondetection(void)
 
 		for(j=0; j<3; j++)
 		{
-			if(dCollide(machine[i].sphere[j], court.floor, 1, &contact[cn].geom, sizeof(dContactGeom))>0)
+			if(dCollide(machine[i].sphere[j], court.floor, 1, &contact[cn].geom, sizeof(dContactGeom)) > 0)
 			{
 				contact[cn].surface.mode = dContactBounce;
 				contact[cn].surface.bounce = 0.3;
@@ -834,7 +831,7 @@ void collisiondetection(void)
 		}
 		for(j=0; j<3; j++)
 		{
-			if(dCollide(machine[i].sphere[j], ball.geom, 1, &contact[cn].geom, sizeof(dContactGeom))>0)
+			if(dCollide(machine[i].sphere[j], ball.geom, 1, &contact[cn].geom, sizeof(dContactGeom)) > 0)
 			{
 				contact[cn].surface.mode = dContactBounce;
 				contact[cn].surface.bounce = 0.2;
@@ -848,7 +845,7 @@ void collisiondetection(void)
 		for(k=0; k<4; k++)
 		{
 			int n;
-			if(n=dCollide(machine[i].geom[k], court.floor, 4, &contact[cn].geom, sizeof(dContact))>0)
+			if((n=dCollide(machine[i].geom[k], court.floor, 4, &contact[cn].geom, sizeof(dContact))) > 0)
 			{
 				for(j=0; j<n; j++)
 				{
@@ -864,7 +861,7 @@ void collisiondetection(void)
 		}
 		for(k=0; k<4; k++)
 		{
-			if(dCollide(ball.geom, machine[i].geom[k], 1, &contact[cn].geom, sizeof(dContactGeom))>0)
+			if(dCollide(ball.geom, machine[i].geom[k], 1, &contact[cn].geom, sizeof(dContactGeom)) > 0)
 			{
 				contact[cn].surface.mode = dContactBounce;
 				contact[cn].surface.bounce = 0;
@@ -886,7 +883,7 @@ void collisiondetection(void)
 				for(k=0; k<4; k++)
 				{
 					int n;
-					if(n=dCollide(machine[i].geom[k], explosionsphere, 4, &contact[cn].geom, sizeof(dContact))>0)
+					if((n=dCollide(machine[i].geom[k], explosionsphere, 4, &contact[cn].geom, sizeof(dContact))) > 0)
 					{
 						contact[cn].surface.mode = dContactSoftERP | dContactSoftCFM;
 						contact[cn].surface.mu = 0;
@@ -906,7 +903,7 @@ void collisiondetection(void)
 	{
 		for(k=0; k<4; k++)
 		{
-			if(n=dCollide(machine[0].geom[i], machine[1].geom[k], 4, &contact[cn].geom, sizeof(dContact))>0)
+			if((n=dCollide(machine[0].geom[i], machine[1].geom[k], 4, &contact[cn].geom, sizeof(dContact))) > 0)
 			{
 				for(j=0; j<n; j++)
 				{

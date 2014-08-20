@@ -10,6 +10,8 @@
 #ifndef _TEXT_H_
 #define _TEXT_H_
 
+#include <string>
+
 #include <allegro.h>
 #include <alleggl.h>
 
@@ -33,7 +35,7 @@ class Text
 		Text(void) { staterestore=0; }
 		void init(void);
 		void destroy(void);
-		void print(int x, int y, char * s);
+		void print(int x, int y, std::string s);
 		void begin(void) { setup(); staterestore=1; };
 		void end(void) { restore(); staterestore=0; };
 };

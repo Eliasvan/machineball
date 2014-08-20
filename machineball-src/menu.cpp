@@ -265,7 +265,6 @@ int ballMenu(void)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	GLuint balltex[6];
-	DATAFILE * ballbmp;
 	allegro_gl_set_texture_format(GL_RGB);
 	balltex[0] = allegro_gl_make_texture(&mb_ball01_bmp);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

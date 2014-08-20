@@ -136,35 +136,38 @@ int main(int argc, char **argv)
 	{
 		// Load configuration from file:
 		char tempdummy[256];
-		fgets(tempdummy, 256, fp);
 		int versiontest;
-		fscanf(fp, "%d", &versiontest);
-		// 1000 is magic number for version 1.0
-		if(versiontest!=1000)
-		{
+		if (
+				fgets(tempdummy, 256, fp) == NULL || 
+				fscanf(fp, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", 
+					&versiontest,
+					&options.resolution, 
+					&options.colordepth,
+					&options.zdepth,
+					&options.musicvol,
+					&options.soundvol,
+					&options.p1left,
+					&options.p1right,
+					&options.p1up,
+					&options.p1down,
+					&options.p1special,
+					&options.p1fire,
+					&options.p2left,
+					&options.p2right,
+					&options.p2up,
+					&options.p2down,
+					&options.p2special,
+					&options.p2fire,
+					&options.logoshow,
+					&options.fpsshow,
+					&options.camerashake
+				) != 21 ||
+				versiontest != 1000 // 1000 is magic number for version 1.0
+		) {
+			fclose(fp);
 			allegro_message("=== Configuration file is corrupt or from an incompatible version of Machine Ball ===\n");
 			exit(-1);
 		}
-		fscanf(fp, "%d", &options.resolution);
-		fscanf(fp, "%d", &options.colordepth);
-		fscanf(fp, "%d", &options.zdepth);
-		fscanf(fp, "%d", &options.musicvol);
-		fscanf(fp, "%d", &options.soundvol);
-		fscanf(fp, "%d", &options.p1left);
-		fscanf(fp, "%d", &options.p1right);
-		fscanf(fp, "%d", &options.p1up);
-		fscanf(fp, "%d", &options.p1down);
-		fscanf(fp, "%d", &options.p1special);
-		fscanf(fp, "%d", &options.p1fire);
-		fscanf(fp, "%d", &options.p2left);
-		fscanf(fp, "%d", &options.p2right);
-		fscanf(fp, "%d", &options.p2up);
-		fscanf(fp, "%d", &options.p2down);
-		fscanf(fp, "%d", &options.p2special);
-		fscanf(fp, "%d", &options.p2fire);
-		fscanf(fp, "%d", &options.logoshow);
-		fscanf(fp, "%d", &options.fpsshow);
-		fscanf(fp, "%d", &options.camerashake);
 		fclose(fp);
 	}
 	fp = fopen(rcfile, "w");

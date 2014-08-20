@@ -25,7 +25,7 @@ static int width, height;
 
 struct resolution_entry {
 	int w,h;
-	char *s;
+	char s[10];
 } resolutions[] = {
 	{  320,  200, " 320x200 " },
 	{  320,  240, " 320x240 " },
@@ -55,7 +55,7 @@ static char *resolution_lister (int i, int *size)
 
 struct colour_depth_entry {
 	int depth;
-	char *s;
+	char s[7];
 } colour_depths[] = {
 	{ 15, "15 bpp" },
 	{ 16, "16 bpp" },
@@ -74,7 +74,7 @@ static char *colour_depth_lister (int i, int *size)
 
 struct zbuffer_depth_entry {
 	int depth;
-	char *s;
+	char s[7];
 } zbuffer_depths[] = {
 	{  8, " 8 bpp" },
 	{ 16, "16 bpp" },

@@ -384,7 +384,6 @@ void render(void)
 	glColor3f(0.5, 0.5, 0.5);
 	draw_sphere(ball.getRadius(), 24);
 	glPopMatrix();
-	int j;
 	glEnable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, machinetex);

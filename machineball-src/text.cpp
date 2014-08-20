@@ -140,7 +140,7 @@ void Text::restore(void)
 		glDisable(GL_TEXTURE_2D);
 }
 
-void Text::print(int x, int y, char * s)
+void Text::print(int x, int y, std::string s)
 {
 	if(staterestore==0)
 		setup();
@@ -149,7 +149,7 @@ void Text::print(int x, int y, char * s)
 	glEnable(GL_BLEND);
 	glTranslated(x, y, 0);
 	glListBase(list-32);
-	glCallLists(strlen(s), GL_BYTE, s);
+	glCallLists(s.length(), GL_BYTE, s.c_str());
 	if(staterestore==0)
 		restore();
 }

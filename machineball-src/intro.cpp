@@ -108,8 +108,8 @@ void showIntro(void)
 
 		glColor3f(0.5, 0.5, 0.5);
 		text.begin();
-		text.print(20, (int)(60*(time-8.7)), "THIS IS THE FUTURE.");
-		text.print(20, (int)(60*(time-8.7))-50, "A FUTURE WHERE PRIMITIVE SPORTS");
+		text.print(20, (int)(60*(time-8.7)),     "THIS IS THE FUTURE.");
+		text.print(20, (int)(60*(time-8.7))-50,  "A FUTURE WHERE PRIMITIVE SPORTS");
 		text.print(20, (int)(60*(time-8.7))-100, "NO LONGER EXIST. IN THIS WORLD,");
 		text.print(20, (int)(60*(time-8.7))-150, "THERE IS ONLY ONE SPORT.");
 		text.print(20, (int)(60*(time-8.7))-200, "THERE IS ONLY...");

@@ -1,5 +1,9 @@
-# Set "-Wno-deprecated-declarations", otherwise a lot of needless Allegro 'warnings' emerge
+# Set some custom CXXFLAGS
 
+# Minimize probability of runtime errors
+CXXFLAGS += -Wmaybe-uninitialized -Wunused-variable -Wunused-but-set-variable -Wunused-result -Wcomment
+
+# Avoid a lot of needless Allegro 'warnings' emerge
 CXXFLAGS += -Wno-deprecated-declarations
 
 
