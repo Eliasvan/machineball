@@ -73,4 +73,4 @@ mbdata.dat :
 # 'make clean' will clean up the build-directory
 
 clean :
-	rm machineball main.o window.o intro.o menu.o game.o text.o timer.o controls.o ball.o glode.o camera.o render.o court.o machine.o powerup.o explosion.o models.o options.o mbdata.o mbdata.c mbdata.h mbdata.dat
+	rm -rf machineball main.o window.o intro.o menu.o game.o text.o timer.o controls.o ball.o glode.o camera.o render.o court.o machine.o powerup.o explosion.o models.o options.o mbdata.o mbdata.c mbdata.h mbdata.dat
