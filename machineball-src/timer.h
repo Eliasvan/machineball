@@ -20,7 +20,7 @@ class Timer
   unsigned long ticks;
   double ticks_per_sec;
   
-  void install(double tps=596590.5) { install_int_ex(tickf, (long int)((double)1193181.0/tps)); ticks_per_sec=tps; ticks=0; }
+  void install(double tps=10000.) { install_int_ex(tickf, (long int)((double)1193181.0/tps)); ticks_per_sec=tps; ticks=0; }
   double seconds(void) { return (double)ticks/ticks_per_sec; }
   void reset(void) { ticks=0; }
   /* race proof code to get the seconds and then reset the ticks, without

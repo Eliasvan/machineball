@@ -212,6 +212,8 @@ void startGame(int mode, int cs, int b, gameoptions op)
 
 		if(gamepaused)
 		{
+			rest(50); /* Limit to 20fps, in order to correctly select the song */
+			
 			int keyrightdown = 0, keyleftdown = 0;
 			int needchange = 0;
 			if(!(key[KEY_LEFT] || controls[0].keydown(KEYLEFT)))

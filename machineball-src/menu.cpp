@@ -819,7 +819,7 @@ void gameoptionsMenu(gameoptions *op)
 	int upkey=0, downkey=0, leftkey=0, rightkey=0;
 	while(!(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)))
 	{
-		rest(1);
+		rest(10); /* Limit to 100fps, in order to correctly set the powerup freqs */
 		i+=timer.seconds()/2.0;
 		timer.reset();
 
@@ -1413,7 +1413,7 @@ void audioMenu(void)
 	int upkey=0, downkey=0;
 	while(!(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)) || choice!=2)
 	{
-		rest(1);
+		rest(10); /* Limit to 100fps, in order to correctly set the volumes */
 		i+=timer.seconds()/2.0;
 		timer.reset();
 
