@@ -19,6 +19,7 @@
 #include "text.h"
 #include "timer.h"
 #include "controls.h"
+#define dSINGLE
 #include "glode.h"
 #include "render.h"
 #include "options.h"

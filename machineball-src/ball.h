@@ -10,6 +10,7 @@
 #ifndef _BALL_H_
 #define _BALL_H_
 
+#define dSINGLE
 #include <ode/ode.h>
 
 class Ball

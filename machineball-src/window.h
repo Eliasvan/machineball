@@ -10,6 +10,6 @@
 #ifndef _WINDOW_H_
 #define _WINDOW_H_
 
-void createWindow(int force);
+void createWindow(int force, int do_configure);
 
 #endif

@@ -10,6 +10,7 @@
 #ifndef _MACHINE_H_
 #define _MACHINE_H_
 
+#define dSINGLE
 #include <ode/ode.h>
 #include <allegro.h>
 

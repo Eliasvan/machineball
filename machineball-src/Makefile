@@ -1,7 +1,7 @@
 all : machineball
 
 machineball : main.o window.o intro.o menu.o game.o text.o timer.o controls.o ball.o glode.o camera.o render.o court.o machine.o powerup.o explosion.o models.o mbdata.o options.o mbdata.o
-	gcc main.o window.o intro.o menu.o game.o text.o timer.o controls.o ball.o glode.o camera.o render.o court.o machine.o powerup.o explosion.o models.o mbdata.o options.o -o machineball -laldmb -ldumb -lagl `allegro-config --libs` -lGL -lGLU -lode
+	g++ main.o window.o intro.o menu.o game.o text.o timer.o controls.o ball.o glode.o camera.o render.o court.o machine.o powerup.o explosion.o models.o mbdata.o options.o -o machineball -laldmb -ldumb -lalleggl `allegro-config --libs` -lGL -lGLU -lode -lm
 
 main.o : main.cpp
 
@@ -39,10 +39,10 @@ models.o : models.cpp
 
 options.o : options.cpp
 
-mbdata.o : mbdata.s
+mbdata.o : mbdata.c
 
-mbdata.s : mbdata.dat
-	dat2s mbdata.dat -o mbdata.s -h mbdata.h -p mb
+mbdata.c : mbdata.dat
+	dat2c mbdata.dat -o mbdata.c -h mbdata.h -p mb -g
 
 clean :
 	rm machineball main.o window.o intro.o menu.o game.o text.o timer.o controls.o ball.o glode.o camera.o render.o court.o machine.o powerup.o explosion.o models.o options.o mbdata.o

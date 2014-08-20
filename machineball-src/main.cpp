@@ -9,6 +9,7 @@
 
 #define ALLEGRO_STATICLINK
 #include <allegro.h>
+#define dSINGLE
 #include <ode/ode.h>
 
 #include <aldumb.h>
@@ -35,6 +36,7 @@ int main(int argc, char **argv)
 	// Parse command line args:
 	int i;
 	int forc=1;
+	int do_configure=0;
 
 	char rcfile[1024];
 #ifndef ALLEGRO_WINDOWS
@@ -105,9 +107,9 @@ int main(int argc, char **argv)
 
 	FILE *fp = fopen(rcfile, "r");
 	if(fp==NULL)
-		printf("=== Cannot Open %s for reading. Using default Configuration ===\n", rcfile);
-	if(fp==NULL)
 	{
+		printf("=== Cannot Open %s for reading. Using default Configuration ===\n", rcfile);
+		do_configure=1;
 		// Default values:
 		options.resolution=6;
 		options.colordepth=1;
@@ -197,7 +199,8 @@ int main(int argc, char **argv)
 	}
 
 	srand(time(0));
-	createWindow(forc); // The argument tells us if we want sound or not
+	dInitODE();
+	createWindow(forc, do_configure); // The 1st argument tells us if we want sound or not
 	
 	loadProgramData();
 	dumb_resampling_quality=2;
@@ -290,13 +293,11 @@ void loadProgramData(void)
 	text.init();
 
 
-	allegro_gl_set_texture_format(GL_ALPHA4);
-	shadowtex = allegro_gl_make_texture(&mb_shadow);
+	shadowtex = allegro_gl_make_texture_ex(AGL_TEXTURE_RESCALE|AGL_TEXTURE_FLIP, &mb_shadow, GL_ALPHA4);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	allegro_gl_set_texture_format(GL_ALPHA4);
-	poweruptex = allegro_gl_make_texture(&mb_powerup);
+	poweruptex = allegro_gl_make_texture_ex(AGL_TEXTURE_RESCALE|AGL_TEXTURE_FLIP, &mb_powerup, GL_ALPHA4);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -332,8 +333,7 @@ void loadProgramData(void)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	allegro_gl_set_texture_format(GL_ALPHA4);
-	bennykramekwebtex = allegro_gl_make_texture(&mb_bennykramekweb);
+	bennykramekwebtex = allegro_gl_make_texture_ex(AGL_TEXTURE_RESCALE|AGL_TEXTURE_FLIP, &mb_bennykramekweb, GL_ALPHA4);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 

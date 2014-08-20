@@ -11,6 +11,7 @@
 #include <allegro.h>
 #include <alleggl.h>
 #include <GL/gl.h>
+#define dSINGLE
 #include <ode/ode.h>
 
 #include <stdio.h>

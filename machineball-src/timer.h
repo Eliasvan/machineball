@@ -23,6 +23,17 @@ class Timer
   void install(double tps=596590.5) { install_int_ex(tickf, (long int)((double)1193181.0/tps)); ticks_per_sec=tps; ticks=0; }
   double seconds(void) { return (double)ticks/ticks_per_sec; }
   void reset(void) { ticks=0; }
+  /* race proof code to get the seconds and then reset the ticks, without
+     missing any ticks */
+  double getsecondsandreset(void) {
+    unsigned long ticks_counter = 0;
+    while (ticks) {
+      ticks--;
+      ticks_counter++;
+    }
+    return (double)ticks_counter/ticks_per_sec;
+  }
+  
 };
 
 extern Timer timer;

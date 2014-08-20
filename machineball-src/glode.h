@@ -10,6 +10,7 @@
 #ifndef _GLODE_H_
 #define _GLODE_H_
 
+#define dSINGLE
 #include <ode/ode.h>
 
 void position_gl(dBodyID b);

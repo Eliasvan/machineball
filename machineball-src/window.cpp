@@ -92,7 +92,7 @@ static char *zbuffer_depth_lister (int i, int *size)
 }
 
 
-static int setup (void)
+static int setup (int do_configure)
 {
 #define RESOLUTION_LIST   4
 #define COLOUR_LIST       6
@@ -117,71 +117,35 @@ static int setup (void)
 
 	int x;
 
-	set_dialog_color (dlg, makecol(255, 255, 255), makecol(32, 32, 64));
+	if (do_configure)
+	{
+		set_dialog_color (dlg, makecol(255, 255, 255), makecol(32, 32, 64));
+			
+		x = do_dialog (dlg, 9);
 		
-	x = do_dialog (dlg, 9);
+		options.resolution = dlg[RESOLUTION_LIST].d1;
+		options.colordepth = dlg[COLOUR_LIST].d1;
+		options.zdepth = dlg[ZBUFFER_LIST].d1;
+	}
+	else
+		x = BUTTON_OK;
 	
 	allegro_gl_clear_settings();
-	allegro_gl_set (AGL_COLOR_DEPTH, colour_depths[dlg[COLOUR_LIST].d1].depth);
-	allegro_gl_set (AGL_Z_DEPTH, zbuffer_depths[dlg[ZBUFFER_LIST].d1].depth);
+	allegro_gl_set (AGL_COLOR_DEPTH, colour_depths[options.colordepth].depth);
+	allegro_gl_set (AGL_Z_DEPTH, zbuffer_depths[options.zdepth].depth);
 	allegro_gl_set (AGL_DOUBLEBUFFER, TRUE);
 	allegro_gl_set (AGL_RENDERMETHOD, 1);
 	allegro_gl_set(AGL_FULLSCREEN, TRUE);
 	allegro_gl_set(AGL_REQUIRE, AGL_RENDERMETHOD);
 	allegro_gl_set (AGL_SUGGEST, AGL_COLOR_DEPTH | AGL_Z_DEPTH | AGL_DOUBLEBUFFER | AGL_RENDERMETHOD | AGL_FULLSCREEN);
-	width  = resolutions[dlg[RESOLUTION_LIST].d1].w;
-	height = resolutions[dlg[RESOLUTION_LIST].d1].h;
-
-	if(width==320 && height==200)
-		options.resolution=0;
-	if(width==320 && height==240)
-		options.resolution=1;
-	if(width==400 && height==300)
-		options.resolution=2;
-	if(width==512 && height==384)
-		options.resolution=3;
-	if(width==640 && height==400)
-		options.resolution=4;
-	if(width==640 && height==480)
-		options.resolution=5;
-	if(width==800 && height==600)
-		options.resolution=6;
-	if(width==1024 && height==768)
-		options.resolution=7;
-	if(width==1152 && height==864)
-		options.resolution=8;
-	if(width==1280 && height==960)
-		options.resolution=9;
-	if(width==1280 && height==1024)
-		options.resolution=10;
-	if(width==1600 && height==1200)
-		options.resolution=11;
-	if(width==1920 && height==1440)
-		options.resolution=12;
-
-	if(colour_depths[dlg[COLOUR_LIST].d1].depth==15)
-		options.colordepth=0;
-	if(colour_depths[dlg[COLOUR_LIST].d1].depth==16)
-		options.colordepth=1;
-	if(colour_depths[dlg[COLOUR_LIST].d1].depth==24)
-		options.colordepth=2;
-	if(colour_depths[dlg[COLOUR_LIST].d1].depth==32)
-		options.colordepth=3;
-
-	if(zbuffer_depths[dlg[ZBUFFER_LIST].d1].depth==8)
-		options.zdepth=0;
-	if(zbuffer_depths[dlg[ZBUFFER_LIST].d1].depth==16)
-		options.zdepth=1;
-	if(zbuffer_depths[dlg[ZBUFFER_LIST].d1].depth==24)
-		options.zdepth=2;
-	if(zbuffer_depths[dlg[ZBUFFER_LIST].d1].depth==32)
-		options.zdepth=3;
+	width  = resolutions[options.resolution].w;
+	height = resolutions[options.resolution].h;
 	
 	return (x == BUTTON_OK);
 }
 
 
-void createWindow(int force)
+void createWindow(int force, int do_configure)
 {
 	// Load configuration from disk
 	// ...
@@ -194,7 +158,8 @@ void createWindow(int force)
 	atexit(&dumb_exit);
 
 	dumb_register_stdfiles();
-	
+
+if (do_configure) {	
 	set_color_depth(16);
 	if(set_gfx_mode(GFX_AUTODETECT_WINDOWED, 600, 400, 0, 0) < 0)
 	{
@@ -217,7 +182,7 @@ void createWindow(int force)
 
 	MoveWindow(wnd, (dw-w)/2, (dh-h)/2, w, h, TRUE); 
 #endif
-
+}
 
 	install_keyboard();
 	install_mouse();
@@ -234,6 +199,7 @@ void createWindow(int force)
 	}
 	set_volume(options.soundvol, -1);
 
+if (do_configure) {
 	acquire_screen();
 	
 	rectfill(screen, 0, 0, 599, 399, makecol(64, 64, 128));
@@ -251,10 +217,11 @@ void createWindow(int force)
 				putpixel(screen, x, y, makecol(0, 0, y*192/400));
 
 	release_screen();
+}
 	
 	install_allegro_gl();
 
-	int ok = setup();
+	int ok = setup(do_configure);
 	if(!ok)
 		exit(0);
 	

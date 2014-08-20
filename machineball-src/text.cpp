@@ -65,8 +65,7 @@ void Text::init(void)
 
 
 	// Create the OpenGL texture from the BITMAP
-	allegro_gl_set_texture_format(GL_INTENSITY4);
-	texture = allegro_gl_make_texture(bmp);
+	texture = allegro_gl_make_texture_ex(AGL_TEXTURE_RESCALE|AGL_TEXTURE_FLIP, bmp, GL_INTENSITY4);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 

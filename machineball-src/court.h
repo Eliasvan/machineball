@@ -10,6 +10,7 @@
 #ifndef _COURT_H_
 #define _COURT_H_
 
+#define dSINGLE
 #include <ode/ode.h>
 
 //         ____0_____

@@ -11,6 +11,7 @@
 #include <allegro.h>
 #include <alleggl.h>
 #include <GL/glu.h>
+#define dSINGLE
 #include <ode/ode.h>
 #include <aldumb.h>
 
@@ -178,9 +179,12 @@ void startGame(int mode, int cs, int b, gameoptions op)
 	int esckeydown=0;
 	while(!((gameover && key[KEY_ESC]) || (gamepaused && key[KEY_F11])))
 	{
-		rest(1);
-		m=timer.seconds();
-		timer.reset();
+		/* m may never be 0, otherwise an assert in ODE will get
+		   triggered */
+		do {
+			rest(1);
+			m=timer.getsecondsandreset();
+		} while (m <= 0);
 
 		poll_joystick();
 		al_poll_duh(dp);
