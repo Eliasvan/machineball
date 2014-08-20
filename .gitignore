@@ -19,3 +19,8 @@
 *.exe
 *.out
 *.app
+
+# Allegro generated outputs
+mbdata.c
+mbdata.dat
+mbdata.h
