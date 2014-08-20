@@ -1,0 +1,110 @@
+Machine Ball   Version 1.0
+  By Benny Kramek
+  benny@kramekweb.com
+  http://benny.kramekweb.com
+
+Machine Ball is a futuristic sport with amazing 3D graphics and realistic
+physics with very simple rules: Get the ball into your opponents goal. You
+can use your machine to push the ball in, or you can collect powerups such
+as missles and blast the ball into the goal. Be creative.
+
+
+Navigating the Menus
+--------------------
+
+When you first start Machine Ball, you will be presented with a menu
+
+Human vs Human  -  Play a game against a friend on the same computer
+Human vs Comp   -  Not available
+Options         -  Configure the game options
+Quit            -  Exit
+
+After selecting Human vs Human, you will be asked to select a court size.
+After this, you will be asked to select a ball. All the balls are
+different in size and physical properties.
+
+You will then be presented with Match Options menu
+
+Match Type          -  Whether the match ends after a time or goal limit
+# Of Minutes/Goals  -  The Time/Goal limit of the match
+Nuke Stuck Ball     -  If the ball gets stuck, whether to nuke it
+Powerups            -  Powerups Enabled in the match or not
+Frequency           -  How often a Powerup appears
+Turbo               -  The likelihood of a Turbo Powerup Appearing
+Shield              -  The likelihood of a Shield Powerup Appearing
+Mines               -  The likelihood of a Mines Powerup Appearing
+Missle              -  The likelihood of a Missle Powerup Appearing
+Emp                 -  The likelihood of an Emp Powerup Appearing
+
+The match will then begin!
+
+
+If you select the Options menu from the main menu you will get
+
+Controls  -  Adjust the controls for the players
+Audio     -  Adjust audio options
+Video     -  Adjust video options
+
+To set the controls:
+Move the selection to the key you want to change. Press enter. Press the
+key or joystick button that you want to use
+
+
+How to Play
+-----------
+
+Your goal is to get the ball into your opponets goal.
+Player 1 tries to get the ball into the right goal.
+Player 2 tries to get the ball into the left goal.
+You can drive around your machine and use your kicker with the "Kick"
+control. You can use a powerup with the "Fire" control.
+
+Turbo  (Blue)    -  A speed boost
+Shield (Green)   -  A shield around you that protects you from explosions
+                    and Emp blasts
+Mines  (Pink)    -  Lay down mines that will explode when something touches
+                    them
+Missle (Yellow)  -  Fire a Missle that will explode when it hits something
+                    and send it flying
+Emp    (Gray)    -  Fire an Emp blast. If this hits your opponent then he
+                    will be disabled for a while
+
+There are many different strategies for the many match types. With practice
+you will be a Machine Ball expert!
+
+Enjoy!
+
+
+Bugs
+----
+
+- Rare physical explosions. These are rare, and may be fixed with
+  improvements to ODE. Sometimes the ball flys away. Sometimes a Machine
+  explodes
+- Setting Player 1's Forward Control to the Down key or setting the
+  Reverse Control to the Up key can cause problems
+- On 1 test system, the "Intro Movie" had graphical bugs
+- Problems with multi-tasking under Windows
+- Possible memory leaks causing disapearing Powerups and funny projectile
+  acceleration
+
+
+Credits
+-------
+
+Programming & Graphics: Benny Kramek
+
+The game uses:
+ODE (physics library)      -  http://www.q12.org/ode
+DUMB (music library)       -  http://dumb.sourceforge.net
+Allegro (gamedev library)  -  http://alleg.sourceforge.net
+OpenGL (graphics library)  -  http://www.opengl.org
+
+
+Thanks to
+---------
+
+Russel Smith, for ODE
+Shawn Hargreaves, for Allegro
+Ben Davis, for helping me out with DUMB and other stuff
+

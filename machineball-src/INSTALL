@@ -1,0 +1,114 @@
+Machine Ball   Version 1.0
+  By Benny Kramek
+  benny@kramekweb.com
+  http://benny.kramekweb.com
+
+This is the source code of Machine Ball. Prepare to compile...
+This is going to be difficult. I recommend that you download
+the generic Machine Ball binary from:
+http://benny.kramekweb.com/machineball
+
+But if you're using a different architecture, or are just one
+of those paranoid people who only compile software from source,
+then read on...
+
+First of all, we need to install the libraries that Machine Ball
+needs:
+
+
+-----------------------------------------------
+1) Allegro
+-----------------------------------------------
+http://alleg.sourceforge.net
+
+You'll need at least version 4.0.2
+I recommend the stable release. There is an "Allegro End-User"
+download. I'm not sure if this will work. I don't recommend it
+
+  ./configure
+  make
+  su
+  make install
+
+
+-----------------------------------------------
+2) AllegroGL
+-----------------------------------------------
+http://allegrogl.sourceforge.net
+
+You'll need at least version 0.1.12
+
+  ./configure
+  make
+  su
+  make install
+
+
+-----------------------------------------------
+3) DUMB
+-----------------------------------------------
+http://dumb.sourceforge.net
+
+You'll need at least version 0.9.1
+(These build instructions might not work for later versions.
+Read the DUMB docs if this doesn't work)
+
+  ./fix.sh unix
+  ./makeall.sh
+  su
+  ./makeall.sh
+
+
+-----------------------------------------------
+4) ODE
+-----------------------------------------------
+http://www.q12.org/ode
+
+You'll need at least version 0.35 (This hasn't been released yet.
+Until the release, you must use CVS:
+
+When prompted for a password, enter "anonymous" (without the quotes)
+
+  cvs -d:pserver:anonymous@q12.org:/cvsroot login
+  cvs -z3 -d:pserver:anonymous@q12.org:/cvsroot co ode
+
+)
+
+  cp config/user-settings.example config/user-settings
+!!! Edit the file config/user-settings, make sure that the settings are correct
+    (The defaults should be fine)
+  make ode-lib
+  su
+  cp -r include/ode /usr/local/include
+  cp lib/libode.a /usr/local/lib
+
+
+-----------------------------------------------
+--------- THAT'S IT! --------------------------
+-----------------------------------------------
+
+After you set up all those libraries. Enter the Machine Ball
+directory and type:
+
+  make
+
+During the build, you will see this message
+
+ I don't know how to do constructor functions on this platform, so you must
+ call fixup_datafile() before using this data! (after setting a video mode).
+
+You can ignore it.
+The supplied Makefile should work without changes for pretty much any unix
+based system. You may have to change the "gcc" command in line 4 to your linker
+
+If you want to install the game system wide:
+
+  su
+  cp machineball /usr/local/bin
+(You can copy it to any other directory in your PATH)
+
+And there you go! Just type machineball at the prompt, find a friend
+and start playing!
+
+If you have any problems, please email me at benny@kramekweb.com
+
