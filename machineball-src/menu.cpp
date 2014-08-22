@@ -81,10 +81,12 @@ int mainMenu(void)
 	int choice=0;
 	int upkey=0, downkey=0;
 	int esc=0;
-	while(!(key[KEY_ENTER] || (key[KEY_ESC] && esc > 6) || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)))
+	int esc2=0;
+	while(!(key[KEY_ENTER] || (key[KEY_ESC] && esc == 1) || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)))
 	{
 		rest(1);
-		if(key[KEY_ESC]){esc++;}
+		if(key[KEY_ESC]){esc2=1;}
+		if(!key[KEY_ESC] && esc2 == 1){esc = 1;}
 		i+=timer.seconds()/2.0;
 		timer.reset();
 
@@ -213,7 +215,7 @@ int mainMenu(void)
 		allegro_gl_end();
 	}
 	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
-	while(key[KEY_ENTER] || (key[KEY_ESC] && esc > 6) || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
+	while(key[KEY_ENTER] || (key[KEY_ESC] && esc ==1) || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
 		if(key[KEY_ESC]){choice = 3;}
 		poll_joystick();
@@ -227,7 +229,7 @@ int mainMenu(void)
 	return choice;
 }
 
-int ballMenu(void)
+int ballMenu(int ballchoice)
 {
 	allegro_gl_begin();
 	glMatrixMode(GL_PROJECTION);
@@ -292,7 +294,7 @@ int ballMenu(void)
 	
 	timer.install();
 	double i=0;
-	int choice=0;
+	int choice=ballchoice;
 	int leftkey=0, rightkey=0;
 	while(!(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)))
 	{
@@ -451,7 +453,7 @@ int ballMenu(void)
 	return choice;
 }
 
-int courtMenu(void)
+int courtMenu(int cs1)
 {
 	allegro_gl_begin();
 	glMatrixMode(GL_PROJECTION);
@@ -495,7 +497,7 @@ int courtMenu(void)
 	
 	timer.install();
 	double i=0;
-	int cs=1;
+	int cs=cs1;
 	int leftkey=0, rightkey=0;
 	while(!(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)))
 	{
@@ -777,19 +779,19 @@ int courtMenu(void)
 	return cs;
 }
 
-int gameoptionsMenu(gameoptions *op)
+int gameoptionsMenu(gameoptions *op,int o1,int o2,int o3,int o4,int o5,int o6,int o7,int o8,int o9,int o10)
 {
-	op->timegoallimit=0;
-	op->timegoals=2;
-	op->powerupsenabled=1;
-	op->powerupfrequency=1;
-	op->preventstuck=1;
+	op->timegoallimit=o1;
+	op->timegoals=o2;
+	op->powerupsenabled=o3;
+	op->powerupfrequency=o4;
+	op->preventstuck=o5;
 	
-	op->turbo=200;
-	op->shield=200;
-	op->mine=200;
-	op->missle=200;
-	op->meshatek=200;
+	op->turbo=o6;
+	op->shield=o7;
+	op->mine=o8;
+	op->missle=o9;
+	op->meshatek=o10;
 
 	allegro_gl_begin();
 	glMatrixMode(GL_PROJECTION);
@@ -1162,10 +1164,10 @@ int gameoptionsMenu(gameoptions *op)
 		allegro_gl_end();
 	}
 	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
+	int output = 0;
 	while(key[KEY_ENTER] || key[KEY_ESC] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
-		if(key[KEY_ESC]){return 1;}
-		else{return 0;}
+		if(key[KEY_ESC]){output = 1;}
 		poll_joystick();
 		al_poll_duh(dp);
 	}
@@ -1173,10 +1175,11 @@ int gameoptionsMenu(gameoptions *op)
 	glDeleteTextures(1, &pat01tex);
 	glDeleteTextures(1, &pat02tex);
 	allegro_gl_end();
-
-	al_stop_duh(dp);
-	menumusicisplaying=0;
-
+	if(output == 0)
+	{
+		al_stop_duh(dp);
+		menumusicisplaying=0;
+	}
 	if(op->timegoals==0)
 		op->timegoals=1;
 	else if(op->timegoals==1)
@@ -1198,6 +1201,7 @@ int gameoptionsMenu(gameoptions *op)
 		op->powerupfrequency=10;
 	else if(op->powerupfrequency==3)
 		op->powerupfrequency=30;
+	return(output);
 }
 
 void humancompmessage(void)

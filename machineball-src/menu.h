@@ -13,9 +13,9 @@
 #include "game.h"
 
 int mainMenu(void);
-int ballMenu(void);
-int courtMenu(void);
-int gameoptionsMenu(gameoptions *op);
+int ballMenu(int ballchoice);
+int courtMenu(int cs1);
+int gameoptionsMenu(gameoptions *op,int o1,int o2,int o3,int o4,int o5,int o6,int o7,int o8,int o9,int o10);
 
 int optionsMenu(void);
 void audioMenu(void);

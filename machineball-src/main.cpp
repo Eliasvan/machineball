@@ -211,15 +211,26 @@ int main(int argc, char **argv)
 	showIntro();
 
 	int menuChoice;
-	int courtSize;
-	int ballChoice;
+	int courtSize = 1;
+	int ballChoice = 0;
 	int responce = 0;
 	int escpress = 0;
 
 	gameoptions o;
 	gameoptions p;
 	
-	p = o;
+	int timegoallimit=0;
+	int timegoals=2;
+	int powerupsenabled=1;
+	int powerupfrequency=1;
+	int preventstuck=1;
+
+	int turbo=200;
+	int shield=200;
+	int mine=200;
+	int missle=200;
+	int meshatek=200;
+	
 	do
 	{
 	    int setup=0;
@@ -230,26 +241,30 @@ int main(int argc, char **argv)
 		{
 			while(setup == 1)
 			{
-			  
-			  courtSize = courtMenu();
+			  int cs = courtSize;
+			  courtSize = courtMenu(courtSize);
 			  setup++;
-			  if(courtSize==4){setup = 0;}
+			  if(courtSize==4){setup = 0; courtSize = cs;}
 			  while(setup == 2)
 			  {
 			    
 			    if(setup == 2 && escpress == 0)
 			    {
-			      rest(100);
-			      ballChoice = ballMenu();
+			      int bc = ballChoice;
+			      ballChoice = ballMenu(ballChoice);
 			      setup++;
-			      if(ballChoice==6){setup = 1;}
+			      if(ballChoice==6){setup = 1;ballChoice = bc;}
 			    }
 			    if(setup == 3 && escpress == 0)
 			    {
+			      p=o;
 			      
-			      responce = gameoptionsMenu(&o);
+			      responce = gameoptionsMenu(&o,timegoallimit,timegoals,powerupsenabled,powerupfrequency,preventstuck,turbo,shield,mine,missle,meshatek);
 			      setup++;
+			      timegoallimit = o.timegoallimit; timegoals = o.timegoals; powerupsenabled = o.powerupsenabled; powerupfrequency = o.powerupfrequency; 
+			      preventstuck = o.preventstuck; turbo = o.turbo; shield = o.shield; mine = o.mine; missle = o.missle; meshatek = o.meshatek;
 			      if(responce == 1){o = p;setup = 2;escpress = 1;}
+			      
 			      
 			    }
 			    if(!key[KEY_ESC]){escpress = 0;}
