@@ -81,10 +81,12 @@ int mainMenu(void)
 	int choice=0;
 	int upkey=0, downkey=0;
 	int esc=0;
-	while(!(key[KEY_ENTER] || (key[KEY_ESC] && esc > 6) || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)))
+	int esc2=0;
+	while(!(key[KEY_ENTER] || (key[KEY_ESC] && esc == 1) || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)))
 	{
 		rest(1);
-		if(key[KEY_ESC]){esc++;}
+		if(key[KEY_ESC]){esc2=1;}
+		if(!key[KEY_ESC] && esc2 == 1){esc = 1;}
 		i+=timer.seconds()/2.0;
 		timer.reset();
 
@@ -213,7 +215,7 @@ int mainMenu(void)
 		allegro_gl_end();
 	}
 	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
-	while(key[KEY_ENTER] || (key[KEY_ESC] && esc > 6) || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
+	while(key[KEY_ENTER] || (key[KEY_ESC] && esc == 1) || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
 		if(key[KEY_ESC]){choice = 3;}
 		poll_joystick();
