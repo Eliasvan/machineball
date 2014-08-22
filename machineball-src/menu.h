@@ -15,7 +15,7 @@
 int mainMenu(void);
 int ballMenu(void);
 int courtMenu(void);
-void gameoptionsMenu(gameoptions *op);
+int gameoptionsMenu(gameoptions *op);
 
 int optionsMenu(void);
 void audioMenu(void);

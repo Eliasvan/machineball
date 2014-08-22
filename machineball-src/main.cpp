@@ -213,18 +213,51 @@ int main(int argc, char **argv)
 	int menuChoice;
 	int courtSize;
 	int ballChoice;
+	int responce = 0;
+	int escpress = 0;
 
 	gameoptions o;
-		
+	gameoptions p;
+	
+	p = o;
 	do
 	{
+	    int setup=0;
+	    while(setup == 0){
+		setup = 1;
 		menuChoice = mainMenu();
 		if(menuChoice==0)
 		{
-			courtSize = courtMenu();
-			ballChoice = ballMenu();
-			gameoptionsMenu(&o);
-			startGame(0, courtSize, ballChoice, o);
+			while(setup == 1)
+			{
+			  
+			  courtSize = courtMenu();
+			  setup++;
+			  if(courtSize==4){setup = 0;}
+			  while(setup == 2)
+			  {
+			    
+			    if(setup == 2 && escpress == 0)
+			    {
+			      rest(100);
+			      ballChoice = ballMenu();
+			      setup++;
+			      if(ballChoice==6){setup = 1;}
+			    }
+			    if(setup == 3 && escpress == 0)
+			    {
+			      
+			      responce = gameoptionsMenu(&o);
+			      setup++;
+			      if(responce == 1){o = p;setup = 2;escpress = 1;}
+			      
+			    }
+			    if(!key[KEY_ESC]){escpress = 0;}
+			  }
+			  
+			}
+			if(setup == 4){
+			  startGame(0, courtSize, ballChoice, o);}
 		}
 		//else if(menuChoice==1)
 		//{
@@ -249,6 +282,7 @@ int main(int argc, char **argv)
 				videoMenu();
 			} while(optionsmenuchoice!=3);
 		}
+	    }
 	} while(menuChoice!=3);
 	creditsMenu();
 

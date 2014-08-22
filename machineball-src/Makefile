@@ -67,7 +67,7 @@ mbdata_c_h : mbdata.dat
 	dat2c mbdata.dat -o mbdata.c -h mbdata.h -p mb -g
 
 mbdata.dat :
-	dat mbdata.dat -f -c2 -a data/*
+	/usr/bin/dat mbdata.dat -f -c2 -a data/*
 
 
 # 'make clean' will clean up the build-directory

@@ -80,9 +80,11 @@ int mainMenu(void)
 	double i=0;
 	int choice=0;
 	int upkey=0, downkey=0;
-	while(!(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)))
+	int esc=0;
+	while(!(key[KEY_ENTER] || (key[KEY_ESC] && esc > 6) || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)))
 	{
 		rest(1);
+		if(key[KEY_ESC]){esc++;}
 		i+=timer.seconds()/2.0;
 		timer.reset();
 
@@ -211,8 +213,9 @@ int mainMenu(void)
 		allegro_gl_end();
 	}
 	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
-	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
+	while(key[KEY_ENTER] || (key[KEY_ESC] && esc > 6) || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
+		if(key[KEY_ESC]){choice = 3;}
 		poll_joystick();
 		al_poll_duh(dp);
 	}
@@ -293,7 +296,9 @@ int ballMenu(void)
 	int leftkey=0, rightkey=0;
 	while(!(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)))
 	{
+		
 		rest(10);
+		if(key[KEY_ESC]){break;}
 		i+=timer.seconds()/2.0;
 		timer.reset();
 
@@ -432,8 +437,9 @@ int ballMenu(void)
 		allegro_gl_end();
 	}
 	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
-	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
+	while(key[KEY_ENTER] || key[KEY_ESC] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
+		if(key[KEY_ESC]){choice = 6;}
 		poll_joystick();
 		al_poll_duh(dp);
 	}
@@ -493,6 +499,7 @@ int courtMenu(void)
 	int leftkey=0, rightkey=0;
 	while(!(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)))
 	{
+		if(key[KEY_ESC]){break;}
 		rest(10);
 		i+=timer.seconds()/2.0;
 		timer.reset();
@@ -756,8 +763,9 @@ int courtMenu(void)
 		allegro_gl_end();
 	}
 	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
-	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
+	while(key[KEY_ENTER] || key[KEY_ESC] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
+		if(key[KEY_ESC]){cs=4;}
 		poll_joystick();
 		al_poll_duh(dp);
 	}
@@ -769,7 +777,7 @@ int courtMenu(void)
 	return cs;
 }
 
-void gameoptionsMenu(gameoptions *op)
+int gameoptionsMenu(gameoptions *op)
 {
 	op->timegoallimit=0;
 	op->timegoals=2;
@@ -818,7 +826,8 @@ void gameoptionsMenu(gameoptions *op)
 	int choice=0;
 	int upkey=0, downkey=0, leftkey=0, rightkey=0;
 	while(!(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)))
-	{
+	{	
+		if(key[KEY_ESC]){break;}
 		rest(10); /* Limit to 100fps, in order to correctly set the powerup freqs */
 		i+=timer.seconds()/2.0;
 		timer.reset();
@@ -1153,8 +1162,10 @@ void gameoptionsMenu(gameoptions *op)
 		allegro_gl_end();
 	}
 	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
-	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
+	while(key[KEY_ENTER] || key[KEY_ESC] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
+		if(key[KEY_ESC]){return 1;}
+		else{return 0;}
 		poll_joystick();
 		al_poll_duh(dp);
 	}
@@ -1259,7 +1270,7 @@ int optionsMenu(void)
 	double i=0;
 	int choice=0;
 	int upkey=0, downkey=0;
-	while(!(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)))
+	while(!(key[KEY_ENTER] ||key[KEY_ESC] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)))
 	{
 		rest(1);
 		i+=timer.seconds()/2.0;
@@ -1363,10 +1374,14 @@ int optionsMenu(void)
 		allegro_gl_end();
 	}
 	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
-	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
+	while(key[KEY_ENTER] || key[KEY_ESC] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
 		poll_joystick();
 		al_poll_duh(dp);
+		if((key[KEY_ESC]))
+		{
+			choice = 3;
+		}	
 	}
 	allegro_gl_begin();
 	glDeleteTextures(1, &pat01tex);
@@ -1413,6 +1428,7 @@ void audioMenu(void)
 	int upkey=0, downkey=0;
 	while(!(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)) || choice!=2)
 	{
+		if(key[KEY_ESC]){break;}
 		rest(10); /* Limit to 100fps, in order to correctly set the volumes */
 		i+=timer.seconds()/2.0;
 		timer.reset();
@@ -1556,7 +1572,7 @@ void audioMenu(void)
 		allegro_gl_end();
 	}
 	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
-	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
+	while(key[KEY_ENTER] || key[KEY_ESC] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
 		poll_joystick();
 		al_poll_duh(dp);
@@ -1605,6 +1621,7 @@ void videoMenu(void)
 	int upkey=0, downkey=0;
 	while(!(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)) || choice!=3)
 	{
+		if(key[KEY_ESC]){break;}
 		rest(1);
 		i+=timer.seconds()/2.0;
 		timer.reset();
@@ -1739,7 +1756,7 @@ void videoMenu(void)
 		allegro_gl_end();
 	}
 	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
-	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
+	while(key[KEY_ENTER] || key[KEY_ESC] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
 		poll_joystick();
 		al_poll_duh(dp);
@@ -2024,6 +2041,7 @@ void controlsMenu(void)
 	int waitforkey=0;
 	while(!(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL)) || choicey!=6)
 	{
+		if(key[KEY_ESC]){break;}
 		rest(1);
 		i+=timer.seconds()/2.0;
 		timer.reset();
@@ -2385,7 +2403,7 @@ void controlsMenu(void)
 		allegro_gl_end();
 	}
 	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
-	while(key[KEY_ENTER] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
+	while(key[KEY_ENTER] || key[KEY_ESC] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
 		poll_joystick();
 		al_poll_duh(dp);
