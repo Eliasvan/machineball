@@ -1164,10 +1164,10 @@ int gameoptionsMenu(gameoptions *op)
 		allegro_gl_end();
 	}
 	play_sample(&mb_menusel_wav, 255, 128, 1000, 0);
+	int output = 0;
 	while(key[KEY_ENTER] || key[KEY_ESC] || key[KEY_SPACE] || controls[0].keydown(KEYFIRE) || controls[0].keydown(KEYSPECIAL))
 	{
-		if(key[KEY_ESC]){return 1;}
-		else{return 0;}
+		if(key[KEY_ESC]){output=1;}
 		poll_joystick();
 		al_poll_duh(dp);
 	}
@@ -1175,10 +1175,11 @@ int gameoptionsMenu(gameoptions *op)
 	glDeleteTextures(1, &pat01tex);
 	glDeleteTextures(1, &pat02tex);
 	allegro_gl_end();
-
-	al_stop_duh(dp);
-	menumusicisplaying=0;
-
+	if(output == 0)
+	{
+		al_stop_duh(dp);
+		menumusicisplaying=0;
+	}
 	if(op->timegoals==0)
 		op->timegoals=1;
 	else if(op->timegoals==1)
@@ -1200,6 +1201,7 @@ int gameoptionsMenu(gameoptions *op)
 		op->powerupfrequency=10;
 	else if(op->powerupfrequency==3)
 		op->powerupfrequency=30;
+	return output;
 }
 
 void humancompmessage(void)
