@@ -45,6 +45,7 @@ class Machine
 		int powerupammo;
 		double powerupcount;
 		double powerupcharge;
+		double turbocount;
 
 		void init();
 		void destroy(void);

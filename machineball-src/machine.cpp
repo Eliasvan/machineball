@@ -275,7 +275,7 @@ void Machine::fire(void)
 		if(poweruptype==0)
 		{
 			powerupammo--;
-			powerupcharge=3;
+			turbocount=3;
 			powerupcount=1;
 			play_sample(&mb_turbo_wav, 255, 128, 1000, 0);
 		}

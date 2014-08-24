@@ -397,7 +397,7 @@ void render(void)
 		else
 			glColor3f(0.5, 0.5, 0.5);
 		bodymodel.render();
-		if(machine[i].powerupcount>0 && machine[i].poweruptype==0)
+		if(machine[i].powerupcount>0 && machine[i].turbocount!=0)
 		{
 			glDisable(GL_TEXTURE_2D);
 			glEnable(GL_BLEND);

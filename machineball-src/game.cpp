@@ -309,6 +309,13 @@ void startGame(int mode, int cs, int b, gameoptions op)
 					if(machine[i].powerupcharge<0)
 						machine[i].powerupcharge=0;
 				}
+				if(machine[i].turbocount>0)
+				{
+					machine[i].turbocount-=m;
+					if(machine[i].turbocount<0)
+						machine[i].turbocount=0;
+						machine[j].powerupcount=0;
+				}
 				if(machine[i].shieldcount>0)
 				{
 					machine[i].shieldcount-=m;
@@ -327,7 +334,7 @@ void startGame(int mode, int cs, int b, gameoptions op)
 					machine[i].powerupcount-=m;
 					if(machine[i].powerupcount<0)
 						machine[i].powerupcount=0;
-					if(machine[i].poweruptype==0)
+					if(machine[i].turbocount!=0)
 						dBodyAddRelForce(machine[i].body[0], 0, 6000, 0);
 				}
 				machine[i].updateupsidedown(m);
@@ -401,7 +408,6 @@ void startGame(int mode, int cs, int b, gameoptions op)
 								machine[j].poweruptype=powerups.getPowerup(i).type;
 								machine[j].powerupammo=0;
 								machine[j].powerupcharge=0;
-								machine[j].powerupcount=0;
 							}
 							machine[j].powerupammo++;
 							if(machine[j].poweruptype==0)
@@ -486,6 +492,7 @@ void startGame(int mode, int cs, int b, gameoptions op)
 					{
 						double ppp=(rand()%10000)/10000.0;
 						if(ppp<=op.turbo)
+							
 							powerups.addPowerup(0);
 						else if(ppp<=op.shield)
 							powerups.addPowerup(1);
