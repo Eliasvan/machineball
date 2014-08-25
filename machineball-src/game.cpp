@@ -175,6 +175,7 @@ void startGame(int mode, int cs, int b, gameoptions op)
 
 	
 	int esckeydown=0;
+	int fre=0;
 	while(!((gameover && key[KEY_ESC]) || (gamepaused && key[KEY_F11])))
 	{
 		/* m may never be 0, otherwise an assert in ODE will get
@@ -299,8 +300,12 @@ void startGame(int mode, int cs, int b, gameoptions op)
 							machine[i].setsteer(0);
 						machine[i].addsteer(-3*m);
 					}
-					if(controls[i].keydown(KEYFIRE))
+					if(controls[i].keydown(KEYFIRE) && fre < 1)
+					{
+						fre = 100;
 						machine[i].fire();
+					}
+					if(controls[i].keydown(KEYFIRE)!=-1){fre -= 1;}
 				}
 
 				if(machine[i].powerupcharge>0)
