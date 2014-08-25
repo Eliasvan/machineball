@@ -46,7 +46,7 @@ court.o : court.cpp
 
 machine.o : mbdata.h machine.cpp
 
-powerup.o : powerup.cpp
+powerup.o : mbdata.h powerup.cpp
 
 explosion.o : mbdata.h explosion.cpp
 

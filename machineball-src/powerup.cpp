@@ -10,7 +10,7 @@
 #define ALLEGRO_STATICLINK
 #include <math.h>
 #include <stdlib.h>
-
+#include "machine.h"
 #include "powerup.h"
 
 void Powerup::init(double xp, double yp, int typep, int questionp)
@@ -48,10 +48,25 @@ void PowerupList::init(int maxxp, int maxyp)
 
 void PowerupList::addPowerup(int t)
 {
-	list[freepos].init(rand()%maxx*2-maxx, rand()%maxy*2-maxy, t, 0);
+	const dReal * pos1 = dBodyGetPosition(machine[0].body[0]);
+	const dReal * pos2 = dBodyGetPosition(machine[0].body[1]);
+	int xpos = rand()%maxx*2-maxx;
+	int ypos = rand()%maxy*2-maxy;
+	
+	while((xpos-pos1[0])*(xpos-pos1[0])+(ypos-pos1[1])*(ypos-pos1[1]) < (maxy*maxy/4) || (xpos-pos2[0])*(xpos-pos2[0])+(ypos-pos2[1])*(ypos-pos2[1]) < (maxy*maxy/4))
+	{
+		xpos = rand()%maxx*2-maxx;
+		ypos = rand()%maxy*2-maxy;
+	}
+	
+	list[freepos].init(xpos, ypos, t, 0);
 	numpowerups++;
 	while(list[freepos].active)
 		freepos++;
+// 	list[freepos].init(rand()%maxx*2-maxx, rand()%maxy*2-maxy, t, 0);
+// 	numpowerups++;
+// 	while(list[freepos].active)
+// 		freepos++;
 }
 
 
