@@ -783,8 +783,10 @@ int gameoptionsMenu(gameoptions *op,int o1,int o2,int o3,int o4,int o5,int o6,in
 {
 	op->timegoallimit=o1;
 	op->timegoals=o2;
+	op->timegoals2=o2;
 	op->powerupsenabled=o3;
 	op->powerupfrequency=o4;
+	op->powerupfrequency2=o4;
 	op->preventstuck=o5;
 	
 	op->turbo=o6;
@@ -890,32 +892,48 @@ int gameoptionsMenu(gameoptions *op,int o1,int o2,int o3,int o4,int o5,int o6,in
 		if((key[KEY_RIGHT] || controls[0].keydown(KEYRIGHT)) && rightkey==0 && choice==1)
 		{
 			op->timegoals++;
+			op->timegoals2++;
 			if(op->timegoals>5)
+			{
 				op->timegoals=0;
+				op->timegoals2=0;
+			}
 			rightkey=1;
 			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_LEFT] || controls[0].keydown(KEYLEFT)) && leftkey==0 && choice==1)
 		{
 			op->timegoals--;
+			op->timegoals2--;
 			if(op->timegoals<0)
+			{
 				op->timegoals=5;
+				op->timegoals2=5;
+			}
 			leftkey=1;
 			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_RIGHT] || controls[0].keydown(KEYRIGHT)) && rightkey==0 && choice==4)
 		{
 			op->powerupfrequency++;
+			op->powerupfrequency2++;
 			if(op->powerupfrequency>3)
+			{
 				op->powerupfrequency=0;
+				op->powerupfrequency2=0;
+			}
 			rightkey=1;
 			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}
 		if((key[KEY_LEFT] || controls[0].keydown(KEYLEFT)) && leftkey==0 && choice==4)
 		{
 			op->powerupfrequency--;
+			op->powerupfrequency2--;
 			if(op->powerupfrequency<0)
+			{
 				op->powerupfrequency=3;
+				op->powerupfrequency2=3;
+			}
 			leftkey=1;
 			play_sample(&mb_menumove_wav, 255, 128, 1000, 0);
 		}

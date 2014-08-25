@@ -261,7 +261,7 @@ int main(int argc, char **argv)
 			      
 			      responce = gameoptionsMenu(&o,timegoallimit,timegoals,powerupsenabled,powerupfrequency,preventstuck,turbo,shield,mine,missle,meshatek);
 			      setup++;
-			      timegoallimit = o.timegoallimit; timegoals = o.timegoals; powerupsenabled = o.powerupsenabled; powerupfrequency = o.powerupfrequency; 
+			      timegoallimit = o.timegoallimit; timegoals = o.timegoals2; powerupsenabled = o.powerupsenabled; powerupfrequency = o.powerupfrequency2; 
 			      preventstuck = o.preventstuck; turbo = o.turbo; shield = o.shield; mine = o.mine; missle = o.missle; meshatek = o.meshatek;
 			      if(responce == 1){o = p;setup = 2;escpress = 1;}
 			      
