@@ -68,6 +68,7 @@ mbdata_c_h : mbdata.dat
 
 mbdata.dat :
 	dat mbdata.dat -f -c2 -a data/*
+	dat mbdata.dat -f -c2 -t bmp -a data/*.{bmp,tga}
 
 
 # 'make clean' will clean up the build-directory
